@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -97,20 +97,6 @@ select {
   cursor: pointer;
 }
 
-.AddButton:hover {
-  background: #45a049;
-}
-
-@media (max-width: 600px) {
-  .filtered {
-    flex-direction: column;
-  }
-
-  .containerOfBooks {
-    grid-template-columns: 1fr;
-  }
-}
-
 .delete {
   padding: 6px 10px;
   border: none;
@@ -131,4 +117,307 @@ select {
   color: white;
   font-weight: bold;
   cursor: pointer;
+}
+
+.AddButton:hover {
+  background: #45a049;
+}
+
+@media (max-width: 600px) {
+  .filtered {
+    flex-direction: column;
+  }
+
+  .containerOfBooks {
+    grid-template-columns: 1fr;
+  }
+} */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
+  padding: 30px;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* خلفية جمالية */
+body::before {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: rgba(76, 175, 80, 0.15);
+  filter: blur(120px);
+  top: -100px;
+  left: -100px;
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: rgba(52, 152, 219, 0.12);
+  filter: blur(120px);
+  bottom: -100px;
+  right: -100px;
+  z-index: -1;
+}
+
+.filtered {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.search {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  backdrop-filter: blur(12px);
+  font-size: 15px;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.searchInput:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+  transform: scale(1.01);
+}
+
+.select-container {
+  min-width: 220px;
+  position: relative;
+}
+
+select {
+  width: 100%;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+/* هون التعديل المهم */
+select option {
+  background: #1e293b;
+  color: white;
+  padding: 10px;
+}
+
+select option:hover {
+  background: #4caf50;
+  color: white;
+}
+
+select option:checked {
+  background: #4caf50;
+  color: white;
+}
+
+select:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+}
+
+.select-container::after {
+  content: "⌄";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: white;
+  font-size: 18px;
+}
+
+.containerOfBooks {
+  white-space: pre-line;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* كرت الكتاب */
+.containerOfBooks div {
+  position: relative;
+  padding: 22px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  transition: 0.35s ease;
+  line-height: 1.8;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 rgba(255, 255, 255, 0.05);
+}
+
+/* لمعة احترافية */
+.containerOfBooks div::before {
+  content: "";
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  top: -120%;
+  left: -120%;
+  transform: rotate(25deg);
+  transition: 0.7s;
+}
+
+.containerOfBooks div:hover::before {
+  top: 100%;
+  left: 100%;
+}
+
+.containerOfBooks div:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(76, 175, 80, 0.4);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(76, 175, 80, 0.2);
+}
+
+/* الفورم */
+.addBook {
+  margin-top: 40px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 25px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.addBook input {
+  flex: 1;
+  min-width: 180px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  outline: none;
+  transition: 0.3s;
+}
+
+.addBook input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.addBook input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 12px rgba(76, 175, 80, 0.4);
+}
+
+/* زر الإضافة */
+.AddButton {
+  padding: 14px 22px;
+  border: none;
+  background: linear-gradient(135deg, #4caf50, #2ecc71);
+  color: white;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 10px 20px rgba(46, 204, 113, 0.25);
+}
+
+.AddButton:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 25px rgba(46, 204, 113, 0.4);
+}
+
+/* حذف */
+.delete {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete:hover {
+  transform: scale(1.05);
+}
+
+/* متوفر */
+.valiable {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #00c853, #69f0ae);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.valiable:hover {
+  transform: scale(1.05);
+}
+
+/* موبايل */
+@media (max-width: 600px) {
+  body {
+    padding: 15px;
+  }
+
+  .filtered {
+    flex-direction: column;
+  }
+
+  .containerOfBooks {
+    grid-template-columns: 1fr;
+  }
+
+  .addBook {
+    flex-direction: column;
+  }
 }
